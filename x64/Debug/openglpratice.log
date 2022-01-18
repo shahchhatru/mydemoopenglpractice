@@ -1,10 +1,1 @@
-﻿  EBO.cpp
-  main.cpp
-C:\Users\Chhatra\source\repos\openglpratice\main.cpp(105,25): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-  shaderClass.cpp
-  VAO.cpp
-C:\Users\Chhatra\source\repos\openglpratice\VAO.cpp(13,63): warning C4244: 'argument': conversion from 'GLsizeiptr' to 'GLsizei', possible loss of data
-  VBO.cpp
-  Generating Code...
-  glad.c
-  openglpratice.vcxproj -> C:\Users\Chhatra\source\repos\openglpratice\x64\Debug\openglpratice.exe
+﻿  openglpratice.vcxproj -> C:\Users\Chhatra\source\repos\openglpratice\x64\Debug\openglpratice.exe

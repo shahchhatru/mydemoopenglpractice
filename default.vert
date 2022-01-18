@@ -10,14 +10,17 @@ layout (location = 1) in vec3 aColor;
 out vec3 color;
 // Controls the scale of the vertices
 uniform float scale;
-
+uniform float scale2;
 //out float scale;
 
 void main()
 {
 	// Outputs the positions/coordinates of all vertices
-	gl_Position = vec4(-(aPos.x + aPos.x * scale), -(aPos.y + aPos.y * scale), aPos.z + aPos.z * scale, 1.0);
+	//gl_Position = vec4((aPos.x + aPos.x * scale), (aPos.y + aPos.y * scale), aPos.z + aPos.z * scale, 1.0);
+	gl_Position = vec4(( aPos.x * scale2+aPos.z*scale), (aPos.y),  aPos.z * scale2-scale*aPos.x, 1.0);
+	//gl_Rotatef=vec4((360,0,1,0))
 	// Assigns the colors from the Vertex Data to "color"
-	color = (1- aColor)*scale;
+	//color = (1- aColor)*scale;
+	color=aColor;
 
 }

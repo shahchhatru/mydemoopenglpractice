@@ -2,7 +2,7 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include<cmath>
-
+#include<stb/stb_image.h>
 #include"shaderClass.h"
 #include"VAO.h"
 #include"VBO.h"
@@ -11,6 +11,7 @@
 
 
 // Vertices coordinates
+/*
 GLfloat vertices[] =
 { //               COORDINATES                  /     COLORS           //
 	-0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower left corner
@@ -21,15 +22,30 @@ GLfloat vertices[] =
 	 0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f  // Inner down
 };
 
+*/
+
+GLfloat vertices[] = {
+	0.0f,0.5f,0.0f,  0.8f, 0.3f,  0.02f,
+	-0.5f,-0.5f,-0.5f, 0.6f, 0.9f,  0.02f,
+	0.5f,-0.5f,-0.5f,	 0.7f, 0.6f,  0.02f,
+	-0.5f,-0.5f,0.5f,	 0.8f, 0.3f,  0.9f,
+	0.5f,-0.5f,0.5f	, 0.18f, 0.3f,  0.5f
+};
 // Indices for vertices order
 GLuint indices[] =
 {
-	0, 3, 5, // Lower left triangle
-	3, 2, 4, // Lower right triangle
-	5, 4, 1 // Upper triangle
+1,2,3,
+1,4,5,
+1,2,4,
+1,3,5,
+4,3,5,
+4,2,3
 };
 
-
+/*0, 3, 5, // Lower left triangle
+	3, 2, 4, // Lower right triangle
+	5, 4, 1 // Upper triangle
+*/
 
 int main()
 {
@@ -88,7 +104,7 @@ int main()
 
 	// Gets ID of uniform called "scale"
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
-
+	GLuint uniID2 = glGetUniformLocation(shaderProgram.ID, "scale2");
 	
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -103,10 +119,12 @@ int main()
 		double time = glfwGetTime();
 		// Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
 		glUniform1f(uniID, sin(time));
+		glUniform1f(uniID2, cos(time));//sin(time));
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
-		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
+		glRotatef(45.0f, 0.0f, 1.0f, 0.0f);
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events

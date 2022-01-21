@@ -18,12 +18,14 @@
 #include"EBO.h"
 #include"Camera.h"
 
+#include"Zmatrix.h";
 const unsigned int width = 800;
 const unsigned int height = 800;
-
+GLfloat vertices[600] ;
+GLuint indices[600] ;
 
 // Vertices coordinates
-GLfloat vertices[] =
+/*GLfloat vertices[] =
 { //     COORDINATES     /        COLORS      /   TexCoord  //
 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	//0.0f, 0.0f,
 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	//5.0f, 0.0f,
@@ -42,11 +44,21 @@ GLuint indices[] =
 	2, 3, 4,
 	3, 0, 4
 };
-
+*/
 
 
 int main()
 {
+	string infix = "1-x/7-y/5+x^2";
+	string postfix = Parser::infixtoPostfix(infix);
+	Zmatrix z(10, 10,indices);
+	z.evaluate(postfix);
+	z.createVertexArray(vertices);
+	z.displayXYZ(vertices);
+	//vertices = z.vertices;
+	//indices = z.indices;
+	z.displayIndexArray(indices);
+	//cout << z.numindices << endl;
 	// Initialize GLFW
 	glfwInit();
 
@@ -86,7 +98,9 @@ int main()
 	VAO1.Bind();
 
 	// Generates Vertex Buffer Object and links it to vertices
+	//VBO VBO1(vertices, sizeof(vertices));
 	VBO VBO1(vertices, sizeof(vertices));
+	cout <<"sizeof "<< sizeof(vertices) << endl << endl;
 	// Generates Element Buffer Object and links it to indices
 	EBO EBO1(indices, sizeof(indices));
 
@@ -97,7 +111,7 @@ int main()
 	// Unbind all to prevent accidentally modifying them
 	VAO1.Unbind();
 	VBO1.Unbind();
-	EBO1.Unbind();
+	//EBO1.Unbind();
 
 
 
@@ -130,7 +144,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		// Specify the color of the background
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClearColor(0.00f, 0.00f, 0.00f, 1.0f);
 		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
@@ -146,7 +160,8 @@ int main()
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
-		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES,z.numindices , GL_UNSIGNED_INT, 0);
+		//glDrawArrays(GL_TRIANGLES, 0,15);
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events

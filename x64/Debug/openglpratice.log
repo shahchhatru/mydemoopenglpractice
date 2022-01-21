@@ -1,4 +1,3 @@
-﻿  Camera.cpp
-  main.cpp
-  Generating Code...
+﻿  main.cpp
+C:\Users\Chhatra\source\repos\openglpratice\main.cpp(21,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   openglpratice.vcxproj -> C:\Users\Chhatra\source\repos\openglpratice\x64\Debug\openglpratice.exe
